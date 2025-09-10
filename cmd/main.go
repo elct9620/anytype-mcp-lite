@@ -10,7 +10,7 @@ import (
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
-const version = "0.1.0" // x-release-please-version
+const Version = "0.1.0" // x-release-please-version
 
 func main() {
 	anytype := anytype.New(os.Getenv("ANYTYPE_API_KEY"))
@@ -19,7 +19,7 @@ func main() {
 	server := mcp.NewServer(&mcp.Implementation{
 		Name:    "anytype",
 		Title:   "Anytype MCP",
-		Version: "v" + version,
+		Version: "v" + Version,
 	},
 		&mcp.ServerOptions{
 			Instructions: "Provide read-only access to Anytype workspace. Help user to retrieve information from their Anytype.",
