@@ -3,7 +3,7 @@ package anytypemcp
 import (
 	"context"
 
-	"github.com/elct9620/anytype-mcp/pkg/anytype"
+	"github.com/elct9620/anytype-mcp-lite/pkg/anytype"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 

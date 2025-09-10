@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	anytypemcp "github.com/elct9620/anytype-mcp"
-	"github.com/elct9620/anytype-mcp/pkg/anytype"
+	anytypemcp "github.com/elct9620/anytype-mcp-lite"
+	"github.com/elct9620/anytype-mcp-lite/pkg/anytype"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 

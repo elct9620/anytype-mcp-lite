@@ -1,4 +1,4 @@
-module github.com/elct9620/anytype-mcp
+module github.com/elct9620/anytype-mcp-lite
 
 go 1.24.4
 

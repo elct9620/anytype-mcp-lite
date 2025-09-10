@@ -25,7 +25,7 @@ The Anytype client is implemented in the `pkg/anytype` directory. We following t
 The MCP server is initialized and started in the `cmd/main.go` file. It imports the Anytype adapter to register as MCP tools.
 
 ```go
-anytypeMcp := anytypemcplite.New(anytype) # anytypemcplite is the adapter package located in the project root
+anytypeMcp := anytypemcp.New(anytype) # anytypemcplite is the adapter package located in the project root
 
 server := mcp.NewServer(...)
 
