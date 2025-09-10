@@ -7,7 +7,7 @@ before:
     - go mod tidy
 
 builds:
-  - cmd: ./cmd
+  - main: ./cmd
     env:
       - CGO_ENABLED=0
     goos:
