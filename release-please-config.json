@@ -7,6 +7,9 @@
     }
   },
   "extra-files": [
-    "cmd/main.go"
+    {
+      "type": "generic",
+      "path": "cmd/main.go"
+    }
   ]
 }
