@@ -10,7 +10,7 @@ import (
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
-const Version = "0.1.0" // x-release-please-version
+const Version = "0.1.0"
 
 func main() {
 	anytype := anytype.New(os.Getenv("ANYTYPE_API_KEY"))

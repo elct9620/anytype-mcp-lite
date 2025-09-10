@@ -7,6 +7,6 @@
     }
   },
   "extra-files": [
-    "./cmd/main.go"
+    "cmd/main.go"
   ]
 }
