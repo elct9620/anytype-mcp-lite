@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/elct9620/anytype-mcp-lite/compare/v0.1.1...v0.1.2) (2025-09-10)
+
+
+### Bug Fixes
+
+* gorelease build config type cmd -&gt; main ([59bb3b4](https://github.com/elct9620/anytype-mcp-lite/commit/59bb3b474e2d3365a44269128f76542b4ddec1c7))
+
 ## [0.1.1](https://github.com/elct9620/anytype-mcp-lite/compare/v0.1.0...v0.1.1) (2025-09-10)
 
 
