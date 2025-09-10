@@ -17,7 +17,7 @@ func main() {
 	server := mcp.NewServer(&mcp.Implementation{
 		Name:    "anytype",
 		Title:   "Anytype MCP",
-		Version: "v1.0.0",
+		Version: "v0.1.0", // x-release-please-version
 	},
 		&mcp.ServerOptions{
 			Instructions: "Provide read-only access to Anytype workspace. Help user to retrieve information from their Anytype.",
