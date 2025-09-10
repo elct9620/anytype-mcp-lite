@@ -7,8 +7,6 @@
     }
   },
   "extra-files": [
-    {
-      "path": "cmd/main.go"
-    }
+    "cmd/main.go"
   ]
 }
