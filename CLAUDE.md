@@ -13,8 +13,13 @@ Anytype MCP Lite is a lightweight Model Context Protocol server providing read-o
 make build          # Build the application to ./dist/anytype-mcp
 make clean          # Clean build artifacts
 go mod tidy         # Update dependencies
-gofmt -w .          # Format Go code (auto-applied via hooks)
+gofmt -w .          # Format Go code
 ```
+
+### Testing
+Currently no test files exist. When adding tests, follow Go conventions:
+- Place tests in `*_test.go` files alongside the code being tested
+- Use `go test ./...` to run all tests
 
 ## Architecture
 
