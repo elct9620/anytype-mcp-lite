@@ -7,5 +7,10 @@
     "blockMode": true
   },
   "rubrics": [
+    {
+      "name": "Testing",
+      "pattern": "_test\.go$",
+      "path": "docs/rubrics/testing.md"
+    }
   ]
 }
