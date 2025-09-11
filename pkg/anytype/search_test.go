@@ -23,35 +23,19 @@ func TestSearch_Success(t *testing.T) {
 				Body:   SearchBody{Query: "test query"},
 			},
 			mockResponse: SearchOutput{
-				Data: []struct {
-					ID      string `json:"id"`
-					SpaceId string `json:"space_id"`
-					Name    string `json:"name"`
-					Type    struct {
-						ID   string `json:"id"`
-						Key  string `json:"key"`
-						Name string `json:"name"`
-					} `json:"type"`
-				}{
+				Data: []Object{
 					{
 						ID:      "obj1",
 						SpaceId: "space1",
 						Name:    "Test Object",
-						Type: struct {
-							ID   string `json:"id"`
-							Key  string `json:"key"`
-							Name string `json:"name"`
-						}{
+						Type: ObjectType{
 							ID:   "type1",
 							Key:  "note",
 							Name: "Note",
 						},
 					},
 				},
-				Pagination: struct {
-					Total  int `json:"total"`
-					Offset int `json:"offset"`
-				}{
+				Pagination: Pagination{
 					Total:  1,
 					Offset: 0,
 				},
@@ -65,35 +49,19 @@ func TestSearch_Success(t *testing.T) {
 				Body:   SearchBody{Query: "another query"},
 			},
 			mockResponse: SearchOutput{
-				Data: []struct {
-					ID      string `json:"id"`
-					SpaceId string `json:"space_id"`
-					Name    string `json:"name"`
-					Type    struct {
-						ID   string `json:"id"`
-						Key  string `json:"key"`
-						Name string `json:"name"`
-					} `json:"type"`
-				}{
+				Data: []Object{
 					{
 						ID:      "obj2",
 						SpaceId: "space2",
 						Name:    "Another Object",
-						Type: struct {
-							ID   string `json:"id"`
-							Key  string `json:"key"`
-							Name string `json:"name"`
-						}{
+						Type: ObjectType{
 							ID:   "type2",
 							Key:  "page",
 							Name: "Page",
 						},
 					},
 				},
-				Pagination: struct {
-					Total  int `json:"total"`
-					Offset int `json:"offset"`
-				}{
+				Pagination: Pagination{
 					Total:  20,
 					Offset: 10,
 				},
@@ -169,20 +137,8 @@ func TestSearch_Pagination(t *testing.T) {
 
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				response := SearchOutput{
-					Data: make([]struct {
-						ID      string `json:"id"`
-						SpaceId string `json:"space_id"`
-						Name    string `json:"name"`
-						Type    struct {
-							ID   string `json:"id"`
-							Key  string `json:"key"`
-							Name string `json:"name"`
-						} `json:"type"`
-					}, tt.dataCount),
-					Pagination: struct {
-						Total  int `json:"total"`
-						Offset int `json:"offset"`
-					}{
+					Data: make([]Object, tt.dataCount),
+					Pagination: Pagination{
 						Total:  tt.totalItems,
 						Offset: tt.offset,
 					},

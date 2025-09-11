@@ -20,20 +20,8 @@ type SearchInput struct {
 }
 
 type SearchOutput struct {
-	Data []struct {
-		ID      string `json:"id"`
-		SpaceId string `json:"space_id"`
-		Name    string `json:"name"`
-		Type    struct {
-			ID   string `json:"id"`
-			Key  string `json:"key"`
-			Name string `json:"name"`
-		} `json:"type"`
-	} `json:"data"`
-	Pagination struct {
-		Total  int `json:"total"`
-		Offset int `json:"offset"`
-	} `json:"pagination"`
+	Data       []Object   `json:"data"`
+	Pagination Pagination `json:"pagination"`
 }
 
 func (a *Anytype) Search(ctx context.Context, input SearchInput) (*SearchOutput, error) {
