@@ -7,17 +7,40 @@ import (
 	"net/http"
 )
 
+const APIVersion = "2025-05-20"
+
+type Transport struct {
+	apiKey     string
+	apiVersion string
+}
+
+func (t *Transport) RoundTrip(req *http.Request) (*http.Response, error) {
+	req = req.Clone(req.Context())
+	req.Header.Add("Anytype-Version", t.apiVersion)
+	req.Header.Add("Authorization", "Bearer "+t.apiKey)
+	req.Header.Add("Accept", "application/json")
+	if req.Method == http.MethodPost {
+		req.Header.Add("Content-Type", "application/json")
+	}
+	return http.DefaultTransport.RoundTrip(req)
+}
+
 type Anytype struct {
-	apiKey    string
-	apiServer string
+	apiServer  string
+	httpClient *http.Client
 }
 
 type AnytypeOption func(*Anytype)
 
 func New(apiKey string, opts ...AnytypeOption) *Anytype {
 	anytype := &Anytype{
-		apiKey:    apiKey,
 		apiServer: "http://127.0.0.1:31009",
+		httpClient: &http.Client{
+			Transport: &Transport{
+				apiKey:     apiKey,
+				apiVersion: APIVersion,
+			},
+		},
 	}
 
 	for _, opt := range opts {
@@ -39,11 +62,7 @@ func (a *Anytype) Get(ctx context.Context, path string, result any) error {
 		return err
 	}
 
-	req.Header.Add("Anytype-Version", "2025-05-20")
-	req.Header.Add("Authorization", "Bearer "+a.apiKey)
-	req.Header.Add("Accept", "application/json")
-
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := a.httpClient.Do(req)
 	if err != nil {
 		return err
 	}
@@ -72,12 +91,7 @@ func (a *Anytype) Post(ctx context.Context, path string, payload any, result any
 		return err
 	}
 
-	req.Header.Add("Anytype-Version", "2025-05-20")
-	req.Header.Add("Authorization", "Bearer "+a.apiKey)
-	req.Header.Add("Content-Type", "application/json")
-	req.Header.Add("Accept", "application/json")
-
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := a.httpClient.Do(req)
 	if err != nil {
 		return err
 	}
