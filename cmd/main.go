@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	anytypemcp "github.com/elct9620/anytype-mcp-lite"
 	"github.com/elct9620/anytype-mcp-lite/pkg/anytype"
+	"github.com/elct9620/anytype-mcp-lite/server"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
@@ -17,7 +17,7 @@ const Version = "0.1.2"
 
 func main() {
 	anytype := anytype.New(os.Getenv("ANYTYPE_API_KEY"))
-	anytypeMcp := anytypemcp.New(anytype)
+	anytypeMcp := server.New(anytype)
 
 	server := mcp.NewServer(&mcp.Implementation{
 		Name:    "anytype",

@@ -11,10 +11,9 @@ To keep the project organized and simple, we use the following structure:
     |- main.go   # Initialize and start the application
 |- pkg/
     |- anytype/  # The Go client library for Anytype
-|-  anytype.go   # The adapter implementation for the Anytype client to MCP server
+|- server/       # The MCP server implementation
+    |- anytype.go # The adapter implementation for the Anytype client to MCP server
 ```
-
-The project root is the adapter implementation for the Anytype client to MCP server. The adapter related code will put here.
 
 ## Anytype Client
 
@@ -22,10 +21,15 @@ The Anytype client is implemented in the `pkg/anytype` directory. We following t
 
 ## MCP Server
 
-The MCP server is initialized and started in the `cmd/main.go` file. It imports the Anytype adapter to register as MCP tools.
+The MCP server is implemented in the `server` directory. It implements the MCP protocol to adapt the Anytype client to MCP tools.
+
+## Command
+
+The entrypoint of the application is in `cmd/main.go`. It initializes the Anytype client, creates an MCP server, and registers the Anytype adapter as a tool.
 
 ```go
-anytypeMcp := anytypemcp.New(anytype) # anytypemcplite is the adapter package located in the project root
+anytype := anytype.New("your-anytype-api-key") # pkg/anytype
+anytypeMcp := server.New(anytype) # server/anytype.go
 
 server := mcp.NewServer(...)
 

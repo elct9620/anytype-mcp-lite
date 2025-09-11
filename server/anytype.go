@@ -1,4 +1,4 @@
-package anytypemcp
+package server
 
 import "github.com/elct9620/anytype-mcp-lite/pkg/anytype"
 

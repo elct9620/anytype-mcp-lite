@@ -1,4 +1,4 @@
-package anytypemcp
+package server
 
 type Property struct {
 	Name   string `json:"name" jsonschema:"the name of the property"`

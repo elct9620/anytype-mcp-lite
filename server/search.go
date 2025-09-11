@@ -1,4 +1,4 @@
-package anytypemcp
+package server
 
 import (
 	"context"
