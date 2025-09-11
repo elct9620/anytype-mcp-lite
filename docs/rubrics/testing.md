@@ -10,9 +10,35 @@ Following are the criteria used to evaluate the quality of tests, review step by
 
 Use descriptive names for test functions that clearly indicate what is being tested.
 
-- `Test_FunctionName` for single scenario can cover all cases
-- `Test_FunctionName_Scenario` for multiple scenarios with different contexts
+- `TestFunctionName` for single scenario can cover all cases
+- `TestFunctionName_Scenario` for multiple scenarios with different contexts
 
+### Single Responsibility (1 point)
+
+Each test function should focus on a single aspect of the functionality being tested. Avoid combining multiple assertions or scenarios in one test.
+
+```go
+func Test_Add_PositiveNumbers(t *testing.T) {
+    tests := []struct {
+        a, b     int
+        expected int
+    }{
+        {1, 2, 3},
+        {10, 20, 30},
+    }
+
+    for _, tt := range tests {
+        t.Parallel()
+        result := Add(tt.a, tt.b)
+        if result != tt.expected {
+            t.Errorf("expected %d, got %d", tt.expected, result)
+        }
+    }
+}
+```
+
+- Do not create complex validation functions in tests
+- The validation should happen in for loop or subtests
 
 ### Table-driven Tests (1 point)
 

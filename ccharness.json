@@ -9,7 +9,7 @@
   "rubrics": [
     {
       "name": "Testing",
-      "pattern": "_test\.go$",
+      "pattern": "_test\\.go$",
       "path": "docs/rubrics/testing.md"
     }
   ]
