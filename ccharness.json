@@ -1,0 +1,11 @@
+{
+  "commit": {
+    "maxFiles": 5,
+    "maxLines": 100
+  },
+  "review": {
+    "blockMode": true
+  },
+  "rubrics": [
+  ]
+}
