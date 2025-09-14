@@ -37,7 +37,7 @@ func (a *App) GetObject(ctx context.Context, req *mcp.CallToolRequest, params Ge
 
 	props := make([]Property, 0)
 	for _, prop := range res.Object.Properties {
-		if prop.Format != "text" || prop.Format == "date" {
+		if prop.Format != "text" && prop.Format != "date" {
 			continue
 		}
 

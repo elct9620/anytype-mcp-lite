@@ -103,10 +103,21 @@ func TestGetObject_Success(t *testing.T) {
 				},
 			},
 			expectedResult: &GetObjectResult{
-				ObjectId:   "obj789",
-				SpaceId:    "space101",
-				Markdown:   "Object with dates",
-				Properties: []Property{}, // Date properties are filtered out due to the condition
+				ObjectId: "obj789",
+				SpaceId:  "space101",
+				Markdown: "Object with dates",
+				Properties: []Property{
+					{
+						Name:   "Created Date",
+						Format: "date",
+						Value:  "2024-01-15",
+					},
+					{
+						Name:   "Modified Date",
+						Format: "date",
+						Value:  "2024-03-20",
+					},
+				},
 			},
 		},
 		{
@@ -173,7 +184,11 @@ func TestGetObject_Success(t *testing.T) {
 						Format: "text",
 						Value:  "Mixed Title",
 					},
-					// Date properties are filtered out due to the condition
+					{
+						Name:   "Created",
+						Format: "date",
+						Value:  "2024-02-10",
+					},
 				},
 			},
 		},
@@ -453,11 +468,6 @@ func TestGetObject_ErrorHandling(t *testing.T) {
 }
 
 func TestGetObject_PropertyFiltering(t *testing.T) {
-	// This test specifically validates the property filtering logic
-	// IMPORTANT: The implementation has a bug on line 40:
-	// Current: if prop.Format != "text" || prop.Format == "date"
-	// Should be: if prop.Format != "text" && prop.Format != "date"
-	// This test documents the ACTUAL behavior (with the bug)
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		response := &anytype.GetObjectOutput{
 			Object: anytype.Object{
@@ -497,19 +507,14 @@ func TestGetObject_PropertyFiltering(t *testing.T) {
 		t.Fatalf("unexpected error: %v", err)
 	}
 
-	// The current implementation includes only text properties due to the logic:
-	// if prop.Format != "text" || prop.Format == "date" { continue }
-	// This means: skip if (format is not text) OR (format is date)
-	// Which only allows text properties through
-	expectedCount := 2 // Only text properties
+	expectedCount := 4 // Both text and date properties
 	if len(result.Properties) != expectedCount {
 		t.Errorf("expected %d properties, got %d", expectedCount, len(result.Properties))
 	}
 
-	// Verify only text properties are included
 	for _, prop := range result.Properties {
-		if prop.Format != "text" {
-			t.Errorf("unexpected property format %s, expected only text", prop.Format)
+		if prop.Format != "text" && prop.Format != "date" {
+			t.Errorf("unexpected property format %s, expected only text or date", prop.Format)
 		}
 	}
 }
